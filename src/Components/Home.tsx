@@ -9,7 +9,7 @@ const Home = ({
   };
 
   return (
-    <div className="flex flex-col items-center justify-center p-0 sm:p-24 gap-9">
+    <div className="flex flex-col items-center justify-center p-0 gap-9 sm:p-24">
       <h1 className="font-medium text-2xl tracking-wide xl:text-3xl">Selecione um arquivo</h1>
       <input
         type="file"
