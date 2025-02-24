@@ -9,7 +9,7 @@ const Home = ({
   };
 
   return (
-    <div className="flex flex-col items-center justify-center p-24 gap-9">
+    <div className="flex flex-col items-center justify-center p-0 sm:p-24 gap-9">
       <h1 className="font-medium text-2xl tracking-wide xl:text-3xl">Selecione um arquivo</h1>
       <input
         type="file"
@@ -20,7 +20,7 @@ const Home = ({
       />
       <label
         htmlFor="file-upload"
-        className="cursor-pointer text-blue-500 border-2 border-black p-40 rounded-lg"
+        className="cursor-pointer text-blue-500 border-2 border-black p-20 sm:p-40 rounded-lg"
       >
         Clique aqui!
       </label>
