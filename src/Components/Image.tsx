@@ -80,12 +80,10 @@ const Image: React.FC<ImageProps> = ({
     const ctx = canvas.getContext("2d");
     if (!ctx) return;
 
-    // Obter a posição do clique relativa à imagem exibida
     const rect = e.currentTarget.getBoundingClientRect();
     const clickX = e.clientX - rect.left;
     const clickY = e.clientY - rect.top;
 
-    // Converter para as coordenadas do canvas (usando as dimensões naturais da imagem)
     const scaleX = canvas.width / e.currentTarget.clientWidth;
     const scaleY = canvas.height / e.currentTarget.clientHeight;
     const x = Math.floor(clickX * scaleX);
@@ -93,7 +91,6 @@ const Image: React.FC<ImageProps> = ({
 
     try {
       const pixel = ctx.getImageData(x, y, 1, 1).data;
-      // Converte a tupla [R, G, B, A] para uma string rgba
       const colorStr = `${pixel[0]}, ${pixel[1]}, ${pixel[2]}, ${
         pixel[3] / 255
       }`;
