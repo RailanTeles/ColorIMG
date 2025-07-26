@@ -38,7 +38,7 @@ function App() {
       formData.append("posB", posB.toString());
   
       try {
-        const response = await fetch("http://127.0.0.1:5000/api/change-color", {
+        const response = await fetch("https://colorimg.onrender.com/api/change-color", {
           method: "POST",
           body: formData,
         });
