@@ -1,4 +1,4 @@
-import React, { useRef, useEffect } from "react";
+import React, { useRef, useEffect, useState } from "react";
 
 interface ImageProps {
   imageURL: string;
@@ -14,6 +14,7 @@ interface ImageProps {
   setPosB: React.Dispatch<React.SetStateAction<number>>;
   setAllColors: () => void;
   error: boolean;
+  loading: boolean;
 }
 
 const Image: React.FC<ImageProps> = ({
@@ -30,9 +31,29 @@ const Image: React.FC<ImageProps> = ({
   setPosB,
   setAllColors,
   error,
+  loading,
 }) => {
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
   const imgRef = useRef<HTMLImageElement | null>(null);
+
+  const [buttonText, setButtonText] = useState("Gerar Imagem");
+  const [buttonColor, setButtonColor] = useState(
+    "bg-green-600 font-medium text-white sm:w-[50%] w-[80%] py-2 rounded-md cursor-pointer hover:scale-110 hover:bg-green-800 hover:text-stone-800 transition-transform-colors duration-300"
+  );
+
+  useEffect(() => {
+    if (loading) {
+      setButtonColor(
+        "bg-gray-600 font-medium text-white sm:w-[50%] w-[80%] py-2 rounded-md"
+      );
+      setButtonText("Carregando...");
+    } else {
+      setButtonColor(
+        "bg-green-600 font-medium text-white sm:w-[50%] w-[80%] py-2 rounded-md cursor-pointer hover:scale-110 hover:bg-green-800 hover:text-stone-800 transition-transform-colors duration-300"
+      );
+      setButtonText("Gerar Imagem");
+    }
+  }, [loading]);
 
   const hexToRgba = (hex: string): string => {
     // Remover o '#' se existir
@@ -151,8 +172,9 @@ const Image: React.FC<ImageProps> = ({
 
         <input
           type="button"
-          value="Gerar Imagem"
-          className="bg-green-600 font-medium text-white sm:w-[50%] w-[80%] py-2 rounded-md cursor-pointer hover:scale-110 hover:bg-green-800 hover:text-stone-800 transition-transform-colors duration-300"
+          value={buttonText}
+          className={buttonColor}
+          disabled={loading}
           onClick={setAllColors}
         />
         {error && (

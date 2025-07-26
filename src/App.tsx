@@ -12,6 +12,7 @@ function App() {
   const [posColor, setPosColor] = useState<string>("");
   const [result, setResult] = useState<boolean>(false);
   const [error, setError] = useState<boolean>(false);
+  const [loading, setLoading] = useState(false);
 
   const [r, setR] = useState<number>(0);
   const [g, setG] = useState<number>(0);
@@ -26,6 +27,7 @@ function App() {
     // Função para enviar dados ao back-end Flask
     const sendImageToBackend = async () => {
       if (!image) return;
+      setLoading(true);
   
       // Montando o FormData
       const formData = new FormData();
@@ -55,10 +57,12 @@ function App() {
   
         // Guardar no state
         setModifiedImage(blobUrl);
+
+        setLoading(false);
   
         // Seta o result para true para renderizar o <Result />
         setResult(true);
-  
+        
       } catch (error) {
         console.error("Erro ao enviar a imagem ao backend:", error);
       }
@@ -100,6 +104,7 @@ function App() {
               setPosB={setPosB}
               setAllColors={setAllColors}
               error={error}
+              loading={loading}
             />
           )}
           {result &&
