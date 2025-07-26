@@ -1,3 +1,5 @@
+# Não publique o index.html fonte, apenas o gerado pelo build
+index.html
 # Logs
 logs
 *.log
