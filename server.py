@@ -2,6 +2,7 @@ from flask import Flask, request, jsonify, send_file
 from flask_cors import CORS
 from PIL import Image
 import io
+import os
 
 app = Flask(__name__)
 CORS(app)  # Permite requisições de outros domínios (ex: seu front-end em localhost:5174)
@@ -57,4 +58,5 @@ def api_change_color():
     return send_file(img_io, mimetype='image/png')
 
 if __name__ == '__main__':
-    app.run(debug=True)  # Roda o servidor na porta 5000
+    port = int(os.environ.get("PORT", 5000))
+    app.run(debug=False, host="0.0.0.0", port=port)
